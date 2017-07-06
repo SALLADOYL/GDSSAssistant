@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="ApplicationName">BBSIT: Voice Assistant</string>
+  <string name="NumbertoCall">7092 0123</string>
+  <string name="CreatePrompt">"Hello Boss. Press the Button to Start a command."</string>
+  <string name="MainCommandList">"
+  Say '1'; to make a Phone Call. 
+  Say '2'; to make an SMS Message. 
+  Say '3'; for reading SMS with assistant.
+  Say '4'; to make an EMail. 
+  Say '5'; for reading Emails with assistant.
+  Say '6'; to load Google Assistant for other commands.
+  "</string>
+  <string name="PhoneCallAskWhoToCall">Who do you want to call?</string>
+  <string name="SMSAskWhoToMessage">Please say who to Message?</string>
+  <string name="EmailAskWhoToEmail">Please say who to Mail?</string>
+  <string name="GDSSEMailServerPort">995</string>
+  <string name="GDSSEMailServerHost">mail.bbspnggroup.com</string>
+  <string name="GDSSEMailAccount">lloyd.laas@bbspnggroup.com</string>
+  <string name="GDSSEMailPwd">Jun17$2806</string>
+  <string name="CurDBFilename">lloydlaasbbspnggroupcom1.db</string>
+  <!--<string name="CurDBFilename">BBSITCommAssistant_DB.db</string>-->
+  <string name="TestDeleteEmailsOn">0</string>
+  <string name="CleanEmailTable">0</string>
+</resources>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/background_dark">
+    <TextView
+        android:text="From"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/etxtMessageFromList"
+        android:textSize="30dip"
+        android:textColor="@android:color/holo_blue_dark"
+        android:textColorHighlight="@android:color/holo_blue_dark" />
+    <TextView
+        android:text="Message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/etxtMessageValueList"
+        android:textSize="10dip" />
+    <TextView
+        android:text="ID"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/etxtMessageIDList"
+        android:visibility="gone" />
+</LinearLayout>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/background_dark">
+    <TextView
+        android:text="From:"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/etxtEmailFromList"
+        android:maxLength="100"
+        android:textSize="25dip"
+        android:textColor="@android:color/holo_blue_dark"
+        android:textColorHighlight="@android:color/holo_blue_dark" />
+    <TextView
+        android:text="Subject"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/etxtEmailSubjectList"
+        android:textColor="@android:color/white"
+        android:textColorHighlight="@android:color/white"
+        android:textSize="10dip"
+        android:layout_marginBottom="10dip" />
+</LinearLayout>

@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="105dip"
+        android:id="@+id/linearLayout1"
+        android:layout_marginTop="10dip">
+        <Button
+            android:text="&lt; Back"
+            android:id="@+id/btnBackPhoneForm"
+            android:layout_width="100dip"
+            android:layout_height="100dip"
+            android:layout_marginLeft="20dip"
+            android:background="@android:color/holo_blue_light" />
+        <Button
+            android:text="Speak"
+            android:id="@+id/btnSpeakPhoneForm"
+            android:layout_width="0dip"
+            android:layout_height="0dip"
+            android:visibility="gone" />
+        <Button
+            android:text="Reset"
+            android:id="@+id/btnResetPhoneForm"
+            android:layout_width="100dip"
+            android:layout_height="100dip"
+            android:layout_marginLeft="10dip"
+            android:background="@android:color/darker_gray" />
+        <ImageButton
+            android:src="@drawable/micspeak"
+            android:id="@+id/imgBtnListenPhoneForm"
+            android:scaleType="fitXY"
+            android:layout_width="100dip"
+            android:layout_height="100dip"
+            android:background="@android:color/white"
+            android:layout_marginLeft="10dip" />
+    </LinearLayout>
+    <TextView
+        android:text=" Phone Call Detail"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtTitlePhoneForm"
+        android:layout_marginTop="20dip"
+        android:textColor="@android:color/black" />
+    <EditText xmlns:tools="http://schemas.android.com/tools"
+        android:inputType="textMultiLine"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/etxtToCallPhoneForm"
+        android:textSize="40dip"
+        android:enabled="false"
+        android:textColor="@android:color/holo_blue_dark" />
+    <EditText xmlns:tools="http://schemas.android.com/tools"
+        android:inputType="textMultiLine"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/etxtTTSPhoneForm"
+        android:textSize="10dip"
+        android:visibility="gone" />
+</LinearLayout>
