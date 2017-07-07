@@ -27,7 +27,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
+    <AndroidUseSharedRuntime>true</AndroidUseSharedRuntime>
     <AndroidLinkMode>None</AndroidLinkMode>
     <EmbedAssembliesIntoApk>true</EmbedAssembliesIntoApk>
     <AotAssemblies>false</AotAssemblies>
@@ -103,6 +103,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Resources\Activities\ConfigActivity.cs" />
+    <Compile Include="Resources\Activities\ConfigEditActivity.cs" />
     <Compile Include="Resources\Activities\DBManager.cs" />
     <Compile Include="Resources\Activities\EmailActivity.cs" />
     <Compile Include="Resources\Activities\EmailReaderActivity.cs" />
