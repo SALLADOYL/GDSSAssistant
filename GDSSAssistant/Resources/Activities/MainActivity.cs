@@ -71,6 +71,23 @@ namespace GDSSAssistant
             //initialize text to speech (read/speak)
             InitTTSMethod();
 
+            recButton = FindViewById<ImageButton>(Resource.Id.imgBtnListen);
+            recButton.Click += delegate {
+                if (textToSpeech.IsSpeaking)
+                {
+                    textToSpeech.Stop();
+                }
+
+                if (!NeedToSpeak)
+                {
+                    ListenToSpeech(0);
+                }
+                else
+                {
+                    InvokeRead();
+                };
+            };
+
             callButton = FindViewById<ImageButton>(Resource.Id.imgBtnCall);
             callButton.Click += delegate {
                 InvokeRead("Phone Call",0);
@@ -165,13 +182,7 @@ namespace GDSSAssistant
         #region "Initialize Speech to Text Library"
         private void InitSTTMethod()
         {
-
-            //var tcs = new TaskCompletionSource<string>();
-
-            // get the resources from the layout
-            recButton = FindViewById<ImageButton>(Resource.Id.imgBtnListen);
-
-            STTtextBox = FindViewById<TextView>(Resource.Id.etxtSTT);
+            //STTtextBox = FindViewById<TextView>(Resource.Id.etxtSTT);
 
             // check to see if we can actually record - if we can, assign the event to the button
             string rec = Android.Content.PM.PackageManager.FeatureMicrophone;
@@ -189,26 +200,24 @@ namespace GDSSAssistant
                 });
 
                 alert.Show();
-            } 
-             
-                recButton.Click += delegate
-                {
-                    //isRecording = !isRecording;
-                    if (textToSpeech.IsSpeaking)
-                    {
-                        textToSpeech.Stop();
-                    }
+            }
 
-                    if (!NeedToSpeak)
-                    {
-                        ListenToSpeech(0);
-                    }
-                    else {
-                        InvokeRead();
-                    };
-                };
-            
-            //return tcs.Task;
+            // get the resources from the layout
+            //recButton = FindViewById<ImageButton>(Resource.Id.imgBtnListen);
+            //recButton.Click += delegate {
+            //    if (textToSpeech.IsSpeaking)
+            //    {
+            //        textToSpeech.Stop();
+            //    }
+
+            //    if (!NeedToSpeak)
+            //    {
+            //        ListenToSpeech(0);
+            //    }
+            //    else {
+            //        InvokeRead();
+            //    };
+            //};
         }
         #endregion
 
