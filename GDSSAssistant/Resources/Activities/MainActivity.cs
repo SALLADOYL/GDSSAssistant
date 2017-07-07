@@ -414,6 +414,10 @@ namespace GDSSAssistant
                         {
                             Process.KillProcess(Process.MyPid());
                         }
+                        else if (textInput.ToLower() == "settings" || textInput.ToLower() == "configuration")
+                        {
+                            StartActivity(typeof(Activities.ConfigActivity));
+                        }
                         else {
                             SetReadMessage("Unrecognized command. You said: " + textInput);
                             

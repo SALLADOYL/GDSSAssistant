@@ -102,6 +102,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Resources\Activities\ConfigActivity.cs" />
     <Compile Include="Resources\Activities\DBManager.cs" />
     <Compile Include="Resources\Activities\EmailActivity.cs" />
     <Compile Include="Resources\Activities\EmailReaderActivity.cs" />
@@ -124,6 +125,15 @@
     <AndroidResource Include="Resources\layout\EmailForm.axml" />
     <AndroidResource Include="Resources\layout\EmailList.axml" />
     <AndroidResource Include="Resources\layout\EmailReader.axml" />
+    <AndroidResource Include="Resources\layout\ConfigForm.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\ConfigList.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
+    <AndroidResource Include="Resources\layout\ConfigEditor.axml">
+      <SubType>Designer</SubType>
+    </AndroidResource>
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\layout\Main.axml">

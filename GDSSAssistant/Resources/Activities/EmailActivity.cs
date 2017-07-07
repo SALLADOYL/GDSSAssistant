@@ -722,12 +722,6 @@ namespace GDSSAssistant.Activities
             }
         }
 
-        //public void setListItems(EmailObject newList)
-        //{
-        //    items = newList;
-        //    //notifyDataSetChanged();
-        //}
-
         public override View GetView(int position, View convertView, ViewGroup parent)
         {
             var item = items[position];
@@ -742,11 +736,5 @@ namespace GDSSAssistant.Activities
             
             return view;
         }
-
-        //ListView emaiListView;
-        //void selectAddressListView_ItemClick(object sender, AdapterView.ItemClickEventArgs e)
-        //{
-
-        //}
     }
 }

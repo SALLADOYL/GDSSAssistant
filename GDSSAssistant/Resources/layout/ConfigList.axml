@@ -5,24 +5,18 @@
     android:layout_height="match_parent"
     android:background="@android:color/background_dark">
     <TextView
-        android:text="From"
+        android:text="Name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/etxtMessageFromList"
-        android:textSize="30dip"
+        android:id="@+id/etxtNameConfigList"
+        android:textSize="20dip"
         android:textColor="@android:color/holo_blue_dark"
         android:textColorHighlight="@android:color/holo_blue_dark" />
     <TextView
-        android:text="Message"
+        android:text="Value"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/etxtMessageValueList"
-        android:textSize="10dip"
+        android:id="@+id/etxtValueConfigList"
+        android:textSize="20dip"
         android:textColor="@android:color/white" />
-    <TextView
-        android:text="ID"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/etxtMessageIDList"
-        android:visibility="gone" />
 </LinearLayout>

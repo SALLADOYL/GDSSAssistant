@@ -1,14 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 
 using Android.App;
 using Android.Content;
-using Android.OS;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 
 using Android.Database.Sqlite;
 using SQLite;
@@ -30,7 +25,7 @@ namespace GDSSAssistant.DataManager
             this.DatabasePath = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), Application.Context.GetString(Resource.String.CurDBFilename));
 
         }
-
+        
         public override void OnCreate(SQLiteDatabase db)
         {
 
@@ -38,12 +33,58 @@ namespace GDSSAssistant.DataManager
             
             using (var Objdb = new SQLiteConnection(DatabasePath))
             {
-                if (Objdb.TableMappings.Count() == 0) {
+                //if (Objdb.TableMappings.Count() == 0) {
+                var tblEmailEntity = Objdb.GetTableInfo("EmailEntity");
+                if (tblEmailEntity.Count==0) {
                     Objdb.CreateTable<EmailEntity>();
+                }
+
+                var tblErrorLogEntity = Objdb.GetTableInfo("ErrorLogEntity");
+                if (tblErrorLogEntity.Count == 0)
+                {
                     Objdb.CreateTable<ErrorLogEntity>();
+                }
+
+                var tblContactEntity = Objdb.GetTableInfo("ContactEntity");
+                if (tblContactEntity.Count == 0)
+                {
                     Objdb.CreateTable<ContactEntity>();
                 }
+
+                var tblConfigEntity = Objdb.GetTableInfo("ConfigEntity");
+                if (tblConfigEntity.Count == 0)
+                {
+                    Objdb.CreateTable<ConfigEntity>();
+                    //populate configentity table /Application.Context.GetString(Resource.String.CurDBFilename)
+                    Objdb.Insert(new ConfigEntity
+                    {
+                        Name = "GDSSEMailServerPort",
+                        Value = Application.Context.GetString(Resource.String.GDSSEMailServerPort),
+                        Type = "string"
+                    });
+                    Objdb.Insert(new ConfigEntity
+                    {
+                        Name = "GDSSEMailServerHost",
+                        Value = Application.Context.GetString(Resource.String.GDSSEMailServerHost),
+                        Type = "string"
+                    });
+                    Objdb.Insert(new ConfigEntity {
+                        Name = "GDSSEMailAccount",
+                        Value = Application.Context.GetString(Resource.String.GDSSEMailAccount),
+                        Type ="string"
+                    });
+                    Objdb.Insert(new ConfigEntity
+                    {
+                        Name = "GDSSEMailPwd",
+                        Value = Application.Context.GetString(Resource.String.GDSSEMailPwd),
+                        Type = "string"
+                    });
+
+                }
             }
+        }
+
+        private void PopulateConfigEntity() {
         }
 
         public override void OnUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)
@@ -119,6 +160,44 @@ namespace GDSSAssistant.DataManager
             }
         }
 
+        public List<ConfigObject> GetConfigList()
+        {
+            List<ConfigObject> retVal = new List<ConfigObject>();
+            string ConfigName = "";
+            string ConfigValue = "";
+            string ConfigType = "";
+            var db = new SQLiteConnection(Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal),
+                Application.Context.GetString(Resource.String.CurDBFilename)));
+            {
+                try
+                {
+                    var qry = db.Query<ConfigEntity>("SELECT * FROM ConfigEntity ORDER BY Name ASC");
+
+                    foreach (ConfigEntity item in qry)
+                    {
+                        ConfigName = item.Name  ?? "";
+                        ConfigValue = item.Value ?? "";
+                        ConfigType = item.Type ?? "";
+
+                        ConfigObject curItem = new ConfigObject(ConfigName, ConfigValue, ConfigType);
+                        retVal.Add(curItem);
+                    }
+                    return retVal;
+                }
+                catch (Exception ex)
+                {
+                    //exception handling code to go here
+                    string errOut = "";
+                    errOut += "Name:" + ConfigName;
+                    errOut += "Value:" + ConfigValue;
+                    errOut += "Type:" + ConfigType;
+
+                    Console.WriteLine(ex.Source + "|" + ex.Message + "|" + errOut);
+                    return retVal;
+                }
+            }
+        }
+
         public bool IsEmailExist(string ThisEmailID) {
             var db = new SQLiteConnection(Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), 
                 Application.Context.GetString(Resource.String.CurDBFilename)));
@@ -140,7 +219,34 @@ namespace GDSSAssistant.DataManager
             }
         }
 
+        public string GetConfigValue(string ConfigName) {
+            var db = new SQLiteConnection(Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal),
+                Application.Context.GetString(Resource.String.CurDBFilename)));
+            {
+                try
+                {
+                    var qry = db.Query<ConfigEntity>("select * from ConfigEntity where Name='" + ConfigName + "'");
 
+                    if (qry.Count > 0)
+                    {
+                        foreach (var item in qry) {
+                            return item.Value;
+                        }
+                        return null;
+                    } else {
+                        return null;
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    //exception handling code to go here
+                    Console.WriteLine(ex.Source + "|" + ex.Message);
+                    return null;
+                }
+            }
+        }
+        
         public long AddEmail(EmailEntity addEmail)
         {
             var db = new SQLiteConnection(Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), Application.Context.GetString(Resource.String.CurDBFilename)));
@@ -155,6 +261,21 @@ namespace GDSSAssistant.DataManager
                 Console.WriteLine(ex.Source + "|" + ex.Message);
                     return -1;
                 }
+        }
+
+        public long AddConfig(ConfigEntity addConfigEntry) {
+            var db = new SQLiteConnection(Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), Application.Context.GetString(Resource.String.CurDBFilename)));
+
+            try
+            {
+                return db.Insert(addConfigEntry);
+            }
+            catch (Exception ex)
+            {
+                //exception handling code to go here
+                Console.WriteLine(ex.Source + "|" + ex.Message);
+                return -1;
+            }
         }
 
         public long ClearMail() {
@@ -188,6 +309,22 @@ namespace GDSSAssistant.DataManager
                 }
         }
 
+        public long UpdateConfig(ConfigEntity updateConfig)
+        {
+            var db = new SQLiteConnection(Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), Application.Context.GetString(Resource.String.CurDBFilename)));
+
+            try
+            {
+                return db.Update(updateConfig);
+            }
+            catch (Exception ex)
+            {
+                //exception handling code to go here
+                Console.WriteLine(ex.Source + "|" + ex.Message);
+                return -1;
+            }
+        }
+
         public long DeleteEmail(EmailEntity deleteEmail)
 {
             var db = new SQLiteConnection(Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), Application.Context.GetString(Resource.String.CurDBFilename)));
@@ -195,6 +332,22 @@ namespace GDSSAssistant.DataManager
              try
             {
                 return db.Delete(deleteEmail);
+            }
+            catch (Exception ex)
+            {
+                //exception handling code to go here
+                Console.WriteLine(ex.Source + "|" + ex.Message);
+                return -1;
+            }
+        }
+
+        public long DeleteConfig(ConfigEntity deleteConfig)
+        {
+            var db = new SQLiteConnection(Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), Application.Context.GetString(Resource.String.CurDBFilename)));
+
+            try
+            {
+                return db.Delete(deleteConfig);
             }
             catch (Exception ex)
             {
@@ -242,6 +395,14 @@ namespace GDSSAssistant.DataManager
         public int Id { get; set; }
         public String Name { get; set; }
         public String EmailAddress { get; set; }
+    }
+
+    public class ConfigEntity
+    {
+        [PrimaryKey, AutoIncrement, Column("_Id")]
+        public string Name { get; set; }
+        public String Value { get; set; }
+        public String Type { get; set; }
     }
 
     #endregion
